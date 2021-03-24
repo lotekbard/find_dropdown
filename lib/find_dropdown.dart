@@ -184,7 +184,12 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
               stream: _bloc.selected$,
               builder: (context, snapshot) {
                 List<T>? multipleSelectedValues;
-                if (isMultipleItems) multipleSelectedValues = snapshot.data! as List<T>;
+                
+                if (snapshot.data != null) {
+                  if (isMultipleItems) multipleSelectedValues = snapshot.data! as List<T>;
+                } else {
+                  if (isMultipleItems) multipleSelectedValues = [] as List<T>;
+                }
 
                 T? selectedValue;
                 if (!isMultipleItems) selectedValue = snapshot.data as T?;
