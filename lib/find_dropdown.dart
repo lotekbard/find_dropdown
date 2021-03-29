@@ -234,8 +234,13 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                   child: widget.dropdownBuilder?.call(context, selectedValue) ??
                       widget.dropdownMultipleItemsBuilder?.call(context, multipleSelectedValues ?? []) ??
                       Builder(builder: (context) {
-                        String? title = isMultipleItems ? multipleSelectedValues?.join(", ").toString() : snapshot.data?.toString();
-                        bool showClearButton = snapshot.data != null && widget.showClearButton;
+                        String? title = isMultipleItems
+                          ? (multipleSelectedValues?.isNotEmpty ?? false)
+                            ? multipleSelectedValues?.join(", ").toString()
+                            : "Wybierz..."
+                          : snapshot.data?.toString();
+
+                        bool showClearButton = snapshot.data != null && widget.showClearButton && (multipleSelectedValues?.isNotEmpty ?? true);
                         return Container(
                           padding: EdgeInsets.fromLTRB(15, 5, 5, 5),
                           height: 40,
