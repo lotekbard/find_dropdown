@@ -252,8 +252,10 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(title ?? "",
-                                overflow: TextOverflow.ellipsis,
+                              Flexible(
+                                child: Text(title ?? "",
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
                               Align(
                                 alignment: Alignment.centerRight,
