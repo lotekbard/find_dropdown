@@ -238,7 +238,9 @@ class FindDropdownState<T> extends State<FindDropdown<T>> {
                           ? (multipleSelectedValues?.isNotEmpty ?? false)
                             ? multipleSelectedValues?.join(", ").toString()
                             : "Wybierz..."
-                          : snapshot.data?.toString();
+                          : snapshot.data == null
+                            ? "Wybierz..."
+                            : snapshot.data?.toString();
 
                         bool showClearButton = snapshot.data != null && widget.showClearButton && (multipleSelectedValues?.isNotEmpty ?? true);
                         return Container(
